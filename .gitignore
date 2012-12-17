@@ -1,0 +1,6 @@
+BalanceLogic.egg-info/
+build/
+debian/files
+debian/python-balance-logic.*
+debian/python-balance-logic/
+dist/

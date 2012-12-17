@@ -1,0 +1,35 @@
+A library implementing balance logic for distributed storages.
+
+Distributed storage should consist of units, which are base balance entity.
+Balancing is parameterized with balance directives of the following form:
+{
+	"UnitDataType": "type42",
+	"MinimumFreeSpaceInKbToParticipate": 65535,
+	"MinimumFreeSpaceRelativeToParticipate": 0.15,
+	"MinimumUnitsWithPositiveWeight": 10,
+	"AdditionalUnitsNumber": 3,
+	"AdditionalUnitsPercentage": 0.15,
+	"AdditionalMessagePerSecondNumber": 20,
+	"AdditionalMessagePerSecondPercentage": 0.15,
+	"TailHeightPercentage": 0.95,
+	"TailHeightSpaceInKb": 500000,
+	"WeightMultiplierHead": 1000000,
+	"WeightMultiplierTail": 600000,
+	"MinimumWeight": 10000
+}
+
+Also balancing is provided with list of unit objects. Unit objects must provide the following methods:
+	* unitId(self) - unit ID, unique for each unit, must be usable for dict key.
+	* dataType(self) - data type of the unit. Only units with dataType equal to balance directive
+	"UnitDataType" are returned after balancing.
+	* realPutPerPeriod(self) - current rate for put.
+	* maxPutPerPeriod(self) - estimated maximal rate for put.
+	* realGetPerPeriod(self) - current rate for get.
+	* maxGetPerPeriod(self) - estimated maximal rate for get.
+	* freeSpaceInKb(self) - total free space in unit in kB.
+	* freeSpaceRelative(self) - relative free space in unit.
+	* inService(self) - whether unit is in service and its usage should be low.
+	* writeEnable(self) - whether unit is writable.
+	* isBad(self) - whether unit is unusable.
+
+The returned value is tuple of dictionary with unit weights and cluster statistics.
