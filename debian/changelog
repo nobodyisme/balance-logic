@@ -1,3 +1,9 @@
+balance-logic (0.2) unstable; urgency=low
+
+  * Fixed debianization
+
+ -- Anton Kortunov <toshik@yandex-team.ru>  Wed, 19 Dec 2012 16:53:10 +0400
+
 balance-logic (0.1) unstable; urgency=low
 
   * Created package
