@@ -10,7 +10,7 @@ def read(fname):
 
 setup(
     name = "BalanceLogic",
-    version = "0.1",
+    version = "0.2",
     author = "Vitaly Kapustian",
     author_email = "vkap@yandex-team.ru",
     description = ("A library implementing balance logic for distributed key-value storages."),
