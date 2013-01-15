@@ -1,3 +1,9 @@
+balance-logic (0.3) unstable; urgency=low
+
+  * Added unit tests
+
+ -- Vitaly Kapustian <vkap@yandex-team.ru>  Mon, 14 Jan 2013 16:22:26 +0400
+
 balance-logic (0.2) unstable; urgency=low
 
   * Fixed debianization

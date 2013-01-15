@@ -5,3 +5,5 @@ debian/python-balance-logic.*
 debian/python-balance-logic/
 dist/
 .*
+*.pyc
+debian/python-*

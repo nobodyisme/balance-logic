@@ -1,0 +1,15 @@
+{
+	"UnitDataType": "type42",
+	"MinimumFreeSpaceInKbToParticipate": 65535,
+	"MinimumFreeSpaceRelativeToParticipate": 0.15,
+	"MinimumUnitsWithPositiveWeight": 10,
+	"AdditionalUnitsNumber": 3,
+	"AdditionalUnitsPercentage": 0.15,
+	"AdditionalMessagePerSecondNumber": 20,
+	"AdditionalMessagePerSecondPercentage": 0.15,
+	"TailHeightPercentage": 0.95,
+	"TailHeightSpaceInKb": 500000,
+	"WeightMultiplierHead": 1000000,
+	"WeightMultiplierTail": 600000,
+	"MinimumWeight": 10000
+}
