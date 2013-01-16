@@ -25,7 +25,6 @@ class StubUnit:
         self.__writeEnable = pwriteEnable
         self.__isBad = pisBad
         
-
     def set(self,
                 punitId = None,
                 pdataType = None,

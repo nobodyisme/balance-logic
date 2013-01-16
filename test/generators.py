@@ -25,8 +25,8 @@ def unloaded_unit(unitId = None, dataType = balance_directives["UnitDataType"]):
     return stubUnit.StubUnit(
                              unitId,
                              dataType,
-                             prealPutPerSec = 0,
-                             prealGetPerSec = 0)
+                             prealPutPerPeriod = 0,
+                             prealGetPerPeriod = 0)
 
 def archive_unit(unitId = None, dataType = balance_directives["UnitDataType"]):
     if unitId is None:
@@ -36,4 +36,4 @@ def archive_unit(unitId = None, dataType = balance_directives["UnitDataType"]):
     return stubUnit.StubUnit(
                              unitId,
                              dataType,
-                             prealPutPerSec = 0)
+                             prealPutPerPeriod = 0)
