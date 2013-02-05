@@ -21,7 +21,8 @@ Balancing is parameterized with balance directives of the following form:
 Also balancing is provided with list of unit objects. Unit objects must provide the following methods:
 	* unitId(self) - unit ID, unique for each unit, must be usable for dict key.
 	* dataType(self) - data type of the unit. Only units with dataType equal to balance directive
-	"UnitDataType" are returned after balancing.
+	"UnitDataType" are returned after balancing. If custom filter rule is provided, there's no need
+	in this method.
 	* realPutPerPeriod(self) - current rate for put.
 	* maxPutPerPeriod(self) - estimated maximal rate for put.
 	* realGetPerPeriod(self) - current rate for get.

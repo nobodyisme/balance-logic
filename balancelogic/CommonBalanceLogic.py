@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-def isAppropriateForBalance(unit, dataType, minimumFreeSpace, minimumFreeSpaceRelative):
+def isAppropriateForBalance(unit, filterRule, minimumFreeSpace, minimumFreeSpaceRelative):
     if (unit.inService()):
         return False
     if (not unit.writeEnable()):
         return False
-    if (not dataType==unit.dataType()):
+    if (not filterRule(unit)):
         return False
     if (minimumFreeSpace>unit.freeSpaceInKb()):
         return False
@@ -15,11 +15,11 @@ def isAppropriateForBalance(unit, dataType, minimumFreeSpace, minimumFreeSpaceRe
         return False
     return True
 
-def getUnitListForBalance(unitOfDisksOnRowsList, dataType, minimumFreeSpace, minimumFreeSpaceRelative):
+def getUnitListForBalance(unitOfDisksOnRowsList, filterRule, minimumFreeSpace, minimumFreeSpaceRelative):
     unitListForBalance=[]
     unitListUnusedInBalance=[]
     for unit in unitOfDisksOnRowsList:
-        if isAppropriateForBalance(unit, dataType, minimumFreeSpace, minimumFreeSpaceRelative):
+        if isAppropriateForBalance(unit, filterRule, minimumFreeSpace, minimumFreeSpaceRelative):
             unitListForBalance.append(unit)
         else:
             unitListUnusedInBalance.append(unit)
@@ -122,13 +122,22 @@ def sumTwoDicts(first, second):
     names=set(first)&set(second)
     return dict((name, first.get(name)+second.get(name)) for name in names)
 
-def rawBalance(unitOfDisksOnRowsList, balanceDirectives):
-    mailUnitType=balanceDirectives["UnitDataType"]
+class dataTypeEquals:
+    def __init__(self, dataType):
+        self.__dataType = dataType
+    
+    def __call__(self, unit_object):
+        return self.__dataType == unit_object.dataType()
+
+def rawBalance(unitOfDisksOnRowsList, balanceDirectives, filterRule = None):
+    mailUnitType=1
+    if filterRule is None:
+        filterRule = dataTypeEquals(balanceDirectives["UnitDataType"])
     minimumFreeSpace=balanceDirectives["MinimumFreeSpaceInKbToParticipate"]
     minimumFreeSpaceRelative=balanceDirectives.get("MinimumFreeSpaceRelativeToParticipate", 0.0)
-    unitListTuple=getUnitListForBalance(unitOfDisksOnRowsList, mailUnitType, minimumFreeSpace, minimumFreeSpaceRelative)
+    unitListTuple=getUnitListForBalance(unitOfDisksOnRowsList, filterRule, minimumFreeSpace, minimumFreeSpaceRelative)
     (unitListForBalance, unitListUnusedInBalance)=unitListTuple
-    unitListUnusedInBalance=filter(lambda e: mailUnitType==e.dataType(), unitListUnusedInBalance)
+    unitListUnusedInBalance=filter(lambda e: filterRule(e), unitListUnusedInBalance)
     unusedForPutClusterStatistics=getClusterStatistics(unitListUnusedInBalance)
     usedForPutClusterStatistics=getClusterStatistics(unitListForBalance)
     clusterStatistics=sumTwoDicts(usedForPutClusterStatistics, unusedForPutClusterStatistics)
