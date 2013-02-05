@@ -1,3 +1,9 @@
+balance-logic (0.4) unstable; urgency=low
+
+  * Added custom filter rule for unit selection
+
+ -- Vitaly Kapustian <vkap@yandex-team.ru>  Tue, 05 Feb 2013 17:56:51 +0400
+
 balance-logic (0.3) unstable; urgency=low
 
   * Added unit tests
