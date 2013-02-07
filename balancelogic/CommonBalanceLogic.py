@@ -122,12 +122,8 @@ def sumTwoDicts(first, second):
     names=set(first)&set(second)
     return dict((name, first.get(name)+second.get(name)) for name in names)
 
-class dataTypeEquals:
-    def __init__(self, dataType):
-        self.__dataType = dataType
-    
-    def __call__(self, unit_object):
-        return self.__dataType == unit_object.dataType()
+def dataTypeEquals(dataType):
+    return lambda unit, dataType=dataType: unit.dataType() == dataType
 
 def rawBalance(unitOfDisksOnRowsList, balanceDirectives, filterRule = None):
     mailUnitType=1
