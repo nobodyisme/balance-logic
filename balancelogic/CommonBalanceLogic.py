@@ -88,6 +88,8 @@ def calculatePosition(sortedUnitList, balanceDirectives, clusterStatistics):
 def smoothUnitsWeights(unitId2weight):
     upperRelativeThreshold=3
     unitIdWeightTupleList=filter(lambda e: e[1]!=0, list(unitId2weight.iteritems()))
+    if not len(unitIdWeightTupleList):
+        return unitId2weight
     weightSum=sum(map(lambda e: e[1], unitIdWeightTupleList))
     weightAverage=weightSum/len(unitIdWeightTupleList)
     thresholdWeight=upperRelativeThreshold*weightAverage
@@ -139,7 +141,9 @@ def rawBalance(unitOfDisksOnRowsList, balanceDirectives, filterRule = None):
     clusterStatistics=sumTwoDicts(usedForPutClusterStatistics, unusedForPutClusterStatistics)
     sortedUnitList=sortUnitListByFreespaceDesc(unitListForBalance)
     # MULCA-479 - this functions caclulate two positions
-    positionTuple=calculatePosition(sortedUnitList, balanceDirectives, clusterStatistics)
+    positionTuple=(calculatePosition(sortedUnitList, balanceDirectives, clusterStatistics)
+                   if sortedUnitList else
+                   (0, 0))
     # MULCA-479 - this function calculate rawBalance units weights
     unitId2weight=calculateUnitWeights(sortedUnitList, balanceDirectives, positionTuple)
     unitId2weight=smoothUnitsWeights(unitId2weight)
