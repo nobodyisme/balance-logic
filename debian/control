@@ -1,5 +1,5 @@
 Source: balance-logic
-Maintainer: Vitaly Kapustian <vkap@yandex-team.ru>
+Maintainer: Anton Kortunov <toshik@yandex-team.ru>
 Section: python
 Priority: optional
 Build-Depends: python-setuptools (>= 0.6b3), debhelper (>= 7), python-support (>= 0.8.4)
