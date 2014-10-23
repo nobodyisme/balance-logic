@@ -1,3 +1,9 @@
+balance-logic (0.7) unstable; urgency=low
+
+  * Do not perform free memory checks, writeEnable check should include memory check by itself
+
+ -- Andrey Vasilenkov <indigo@yandex-team.ru>  Thu, 23 Oct 2014 15:36:21 +0400
+
 balance-logic (0.6) unstable; urgency=low
 
   * Unit weights based on both put and get queries

@@ -1,25 +1,21 @@
 # -*- coding: utf-8 -*-
 
-def isAppropriateForBalance(unit, filterRule, minimumFreeSpace, minimumFreeSpaceRelative):
+def isAppropriateForBalance(unit, filterRule):
     if (unit.inService()):
         return False
     if (not unit.writeEnable()):
         return False
     if (not filterRule(unit)):
         return False
-    if (minimumFreeSpace>unit.freeSpaceInKb()):
-        return False
-    if (minimumFreeSpaceRelative>unit.freeSpaceRelative()):
-        return False
     if (unit.isBad()):
         return False
     return True
 
-def getUnitListForBalance(unitOfDisksOnRowsList, filterRule, minimumFreeSpace, minimumFreeSpaceRelative):
+def getUnitListForBalance(unitOfDisksOnRowsList, filterRule):
     unitListForBalance=[]
     unitListUnusedInBalance=[]
     for unit in unitOfDisksOnRowsList:
-        if isAppropriateForBalance(unit, filterRule, minimumFreeSpace, minimumFreeSpaceRelative):
+        if isAppropriateForBalance(unit, filterRule):
             unitListForBalance.append(unit)
         else:
             unitListUnusedInBalance.append(unit)
@@ -132,9 +128,7 @@ def rawBalance(unitOfDisksOnRowsList, balanceDirectives, filterRule = None):
     mailUnitType=1
     if filterRule is None:
         filterRule = dataTypeEquals(balanceDirectives["UnitDataType"])
-    minimumFreeSpace=balanceDirectives["MinimumFreeSpaceInKbToParticipate"]
-    minimumFreeSpaceRelative=balanceDirectives.get("MinimumFreeSpaceRelativeToParticipate", 0.0)
-    unitListTuple=getUnitListForBalance(unitOfDisksOnRowsList, filterRule, minimumFreeSpace, minimumFreeSpaceRelative)
+    unitListTuple=getUnitListForBalance(unitOfDisksOnRowsList, filterRule)
     (unitListForBalance, unitListUnusedInBalance)=unitListTuple
     unitListUnusedInBalance=filter(lambda e: filterRule(e), unitListUnusedInBalance)
     unusedForPutClusterStatistics=getClusterStatistics(unitListUnusedInBalance)

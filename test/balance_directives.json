@@ -1,7 +1,5 @@
 {
 	"UnitDataType": "type42",
-	"MinimumFreeSpaceInKbToParticipate": 65535,
-	"MinimumFreeSpaceRelativeToParticipate": 0.15,
 	"MinimumUnitsWithPositiveWeight": 10,
 	"AdditionalUnitsNumber": 3,
 	"AdditionalUnitsPercentage": 0.15,

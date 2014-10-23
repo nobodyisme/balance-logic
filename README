@@ -4,8 +4,6 @@ Distributed storage should consist of units, which are base balance entity.
 Balancing is parameterized with balance directives of the following form:
 {
 	"UnitDataType": "type42",
-	"MinimumFreeSpaceInKbToParticipate": 65535,
-	"MinimumFreeSpaceRelativeToParticipate": 0.15,
 	"MinimumUnitsWithPositiveWeight": 10,
 	"AdditionalUnitsNumber": 3,
 	"AdditionalUnitsPercentage": 0.15,
@@ -30,7 +28,7 @@ Also balancing is provided with list of unit objects. Unit objects must provide 
 	* freeSpaceInKb(self) - total free space in unit in kB.
 	* freeSpaceRelative(self) - relative free space in unit.
 	* inService(self) - whether unit is in service and its usage should be low.
-	* writeEnable(self) - whether unit is writable.
+	* writeEnable(self) - whether unit is writable and has enough free memory.
 	* isBad(self) - whether unit is unusable.
 
 The returned value is tuple of dictionary with unit weights and cluster statistics.
