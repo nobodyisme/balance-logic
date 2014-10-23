@@ -1,3 +1,9 @@
+balance-logic (0.6) unstable; urgency=low
+
+  * Unit weights based on both put and get queries
+
+ -- Andrey Vasilenkov <indigo@yandex-team.ru>  Tue, 26 Nov 2013 12:56:39 +0400
+
 balance-logic (0.5) unstable; urgency=low
 
   * Maintainer is changed

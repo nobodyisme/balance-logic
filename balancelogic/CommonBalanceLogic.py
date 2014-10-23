@@ -108,16 +108,17 @@ def calculateUnitWeights(sortedUnitList, balanceDirectives, positionTuple):
     weightMultiplierTail=balanceDirectives["WeightMultiplierTail"]
     minimumWeight=balanceDirectives["MinimumWeight"]
     for (position, unit) in enumerate(sortedUnitList):
-        unitId=unit.unitId()
-        maxGetPerPeriod=unit.maxGetPerPeriod()
-        if position<hardPosition:
-            weight=int(maxGetPerPeriod*weightMultiplierHead)
+        unitId = unit.unitId()
+        maxGetPerPeriod = unit.maxGetPerPeriod()
+        maxPutPerPeriod = unit.maxPutPerPeriod()
+        if position < hardPosition:
+            weight = int((maxGetPerPeriod + maxPutPerPeriod) * weightMultiplierHead)
             unitId2weight[unitId]=max(weight, minimumWeight)
-        elif position<softPosition:
-            weight=int(maxGetPerPeriod*weightMultiplierTail)
-            unitId2weight[unitId]=max(weight, minimumWeight)
+        elif position < softPosition:
+            weight = int((maxGetPerPeriod + maxPutPerPeriod) * weightMultiplierTail)
+            unitId2weight[unitId] = max(weight, minimumWeight)
         else:
-            unitId2weight[unitId]=0
+            unitId2weight[unitId] = 0
     return unitId2weight
 
 def sumTwoDicts(first, second):
